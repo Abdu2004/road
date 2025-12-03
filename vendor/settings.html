@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <title>Vendor Settings - RoadBite</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="manifest" href="../manifest.json">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="home.html" class="logo"><img src="../assets/img/logo.png" alt="RoadBite"> RoadBite Vendor</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card">
+                <h1 style="font-size: 28px; margin-bottom: 8px;">Settings</h1>
+                <p style="color: var(--text-secondary);">Manage your business settings</p>
+            </div>
+
+            <div class="card">
+                <h2 class="card-header">Business Status</h2>
+
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Shop Open</div>
+                        <p style="color: var(--text-secondary); font-size: 14px;">Accept new orders</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="shopOpen" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Auto-accept Orders</div>
+                        <p style="color: var(--text-secondary); font-size: 14px;">Automatically accept incoming orders</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="autoAccept">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-header">Working Hours</h2>
+                
+                <div class="form-group">
+                    <label for="openTime" class="form-label">Opening Time</label>
+                    <input type="time" id="openTime" class="form-input" value="08:00">
+                </div>
+
+                <div class="form-group">
+                    <label for="closeTime" class="form-label">Closing Time</label>
+                    <input type="time" id="closeTime" class="form-input" value="22:00">
+                </div>
+
+                <button class="btn btn-primary btn-block">Save Hours</button>
+            </div>
+
+            <div class="card">
+                <h2 class="card-header">Notifications</h2>
+
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Order Notifications</div>
+                        <p style="color: var(--text-secondary); font-size: 14px;">Get notified of new orders</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="orderNotif" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Review Notifications</div>
+                        <p style="color: var(--text-secondary); font-size: 14px;">Get notified of customer reviews</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="reviewNotif" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Marketing Notifications</div>
+                        <p style="color: var(--text-secondary); font-size: 14px;">Receive promotions and updates</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="marketingNotif">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-header">Account Security</h2>
+                <button class="btn btn-secondary btn-block mb-2">Change Password</button>
+                <button class="btn btn-secondary btn-block mb-2">Two-Factor Authentication</button>
+            </div>
+
+            <div class="card">
+                <h2 class="card-header">Business Settings</h2>
+                <button class="btn btn-secondary btn-block mb-2">Payment Settings</button>
+                <button class="btn btn-secondary btn-block mb-2">Tax Configuration</button>
+                <button class="btn btn-secondary btn-block mb-2">Delivery Zones</button>
+            </div>
+
+            <div class="card">
+                <h2 class="card-header">Support & Legal</h2>
+                <div class="info-item">
+                    <span class="info-label">Help Center</span>
+                    <span class="info-value">→</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Terms of Service</span>
+                    <span class="info-value">→</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Privacy Policy</span>
+                    <span class="info-value">→</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">App Version</span>
+                    <span class="info-value">1.0.0</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-home"></i></span>
+            <span>Home</span>
+        </a>
+        <a href="orders.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-box"></i></span>
+            <span>Orders</span>
+        </a>
+        <a href="menu.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-utensils"></i></span>
+            <span>Menu</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-user"></i></span>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="../assets/js/app.js"></script>
+</body>
+</html>

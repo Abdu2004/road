@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <title>Vendor Profile - RoadBite</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="manifest" href="../manifest.json">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="home.html" class="logo"><img src="../assets/img/logo.png" alt="RoadBite"> RoadBite Vendor</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card">
+                <div class="profile-header">
+                    <div class="profile-avatar">TB</div>
+                    <h1 class="profile-name">Tasty Burgers</h1>
+                    <p class="profile-email">tastyburgers@example.com</p>
+                </div>
+            </div>
+
+            <div class="card profile-info">
+                <h2 class="card-header">Business Information</h2>
+                
+                <div class="info-item">
+                    <span class="info-label">Business Name</span>
+                    <span class="info-value">Tasty Burgers</span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Owner Name</span>
+                    <span class="info-value">Michael Rodriguez</span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Email</span>
+                    <span class="info-value">tastyburgers@example.com</span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Phone</span>
+                    <span class="info-value">+1 234 567 8900</span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Address</span>
+                    <span class="info-value">123 Main St, City, State 12345</span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Business Type</span>
+                    <span class="info-value">Fast Food</span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Member Since</span>
+                    <span class="info-value">January 2024</span>
+                </div>
+
+                <button class="btn btn-primary btn-block mt-3">Edit Profile</button>
+            </div>
+
+            <div class="card">
+                <h2 class="card-header">Business Stats</h2>
+                <div class="grid grid-3">
+                    <div class="stat-card">
+                        <div class="stat-value">842</div>
+                        <div class="stat-label">Total Orders</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">4.8⭐</div>
+                        <div class="stat-label">Rating</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">$28.7K</div>
+                        <div class="stat-label">Total Revenue</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-header">Account Actions</h2>
+                <a href="settings.html" class="btn btn-secondary btn-block mb-2"><i class="fas fa-cog"></i> Settings</a>
+                <a href="revenue.html" class="btn btn-secondary btn-block mb-2"><i class="fas fa-dollar-sign"></i> View Revenue</a>
+                <button class="btn btn-secondary btn-block mb-2"><i class="fas fa-file-alt"></i> Download Reports</button>
+                <button class="btn btn-danger btn-block" onclick="handleLogout()">Logout</button>
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-home"></i></span>
+            <span>Home</span>
+        </a>
+        <a href="orders.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-box"></i></span>
+            <span>Orders</span>
+        </a>
+        <a href="menu.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-utensils"></i></span>
+            <span>Menu</span>
+        </a>
+        <a href="profile.html" class="nav-item active">
+            <span class="nav-icon"><i class="fas fa-user"></i></span>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="../assets/js/app.js"></script>
+</body>
+</html>

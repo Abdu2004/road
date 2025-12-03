@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <title>Profile - RoadBite</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="manifest" href="../manifest.json">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="home.html" class="logo"><img src="../assets/img/logo.png" alt="RoadBite"> RoadBite</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card">
+                <div class="profile-header">
+                    <div class="profile-avatar">JD</div>
+                    <h1 class="profile-name">John Doe</h1>
+                    <p class="profile-email">john.doe@example.com</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-header">Quick Actions</h2>
+                
+                <a href="wallet.html" class="settings-item">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="color: var(--primary-color); font-size: 24px;"><i class="fas fa-wallet"></i></span>
+                        <div>
+                            <p class="settings-label">Wallet</p>
+                            <p class="settings-description">View balance & transactions</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color: var(--text-tertiary);"></i>
+                </a>
+
+                <a href="orders.html" class="settings-item">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="color: var(--primary-color); font-size: 24px;"><i class="fas fa-receipt"></i></span>
+                        <div>
+                            <p class="settings-label">My Orders</p>
+                            <p class="settings-description">Track & view order history</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color: var(--text-tertiary);"></i>
+                </a>
+
+                <a href="favorites.html" class="settings-item">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <span style="color: var(--primary-color); font-size: 24px;"><i class="fas fa-heart"></i></span>
+                        <div>
+                            <p class="settings-label">Favorites</p>
+                            <p class="settings-description">Your saved restaurants</p>
+                        </div>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color: var(--text-tertiary);"></i>
+                </a>
+            </div>
+
+            <div class="card profile-info">
+                <h2 class="card-header">Personal Information</h2>
+                
+                <div class="info-item">
+                    <span class="info-label">Full Name</span>
+                    <span class="info-value">John Doe</span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Email</span>
+                    <span class="info-value">john.doe@example.com</span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Phone</span>
+                    <span class="info-value">+1 234 567 8900</span>
+                </div>
+
+                <div class="info-item">
+                    <span class="info-label">Date of Birth</span>
+                    <span class="info-value">January 15, 1990</span>
+                </div>
+
+                <button class="btn btn-primary btn-block mt-3">Edit Profile</button>
+                <button class="btn btn-secondary btn-block mt-2" onclick="handleLogout()">Logout</button>
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-home"></i></span>
+            <span>Home</span>
+        </a>
+        <a href="map.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-map"></i></span>
+            <span>Map</span>
+        </a>
+        <a href="profile.html" class="nav-item active">
+            <span class="nav-icon"><i class="fas fa-user"></i></span>
+            <span>Profile</span>
+        </a>
+        <a href="settings.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-cog"></i></span>
+            <span>Settings</span>
+        </a>
+    </nav>
+
+    <script src="../assets/js/app.js"></script>
+</body>
+</html>

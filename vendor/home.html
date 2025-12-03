@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <title>Vendor Dashboard - RoadBite</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="manifest" href="../manifest.json">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="home.html" class="logo"><img src="../assets/img/logo.png" alt="RoadBite"> RoadBite Vendor</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card">
+                <h1 style="font-size: 32px; margin-bottom: 8px;">Welcome back! <i class="fas fa-hand-wave"></i></h1>
+                <p style="color: var(--text-secondary);">Here's your business overview</p>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="stat-card">
+                    <div class="stat-value">$2,847</div>
+                    <div class="stat-label">Today's Revenue</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">Today's Orders</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">4.8⭐</div>
+                    <div class="stat-label">Average Rating</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="flex-between mb-3">
+                    <h2 class="card-header" style="margin-bottom: 0;">Quick Actions</h2>
+                </div>
+                <div class="grid grid-2">
+                    <a href="orders.html" class="btn btn-primary"><i class="fas fa-box"></i> View Orders</a>
+                    <a href="menu.html" class="btn btn-secondary"><i class="fas fa-utensils"></i> Manage Menu</a>
+                    <a href="revenue.html" class="btn btn-secondary"><i class="fas fa-dollar-sign"></i> Revenue</a>
+                    <a href="profile.html" class="btn btn-secondary"><i class="fas fa-store"></i> Shop Profile</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-header">Recent Orders</h2>
+                <div class="orders-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Customer</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#1234</td>
+                                <td>John Doe</td>
+                                <td>$45.99</td>
+                                <td><span class="status-badge status-pending">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td>#1233</td>
+                                <td>Jane Smith</td>
+                                <td>$32.50</td>
+                                <td><span class="status-badge status-completed">Completed</span></td>
+                            </tr>
+                            <tr>
+                                <td>#1232</td>
+                                <td>Bob Wilson</td>
+                                <td>$28.75</td>
+                                <td><span class="status-badge status-completed">Completed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <a href="orders.html" class="btn btn-secondary btn-block mt-2">View All Orders</a>
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item active">
+            <span class="nav-icon"><i class="fas fa-home"></i></span>
+            <span>Home</span>
+        </a>
+        <a href="orders.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-box"></i></span>
+            <span>Orders</span>
+        </a>
+        <a href="menu.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-utensils"></i></span>
+            <span>Menu</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-user"></i></span>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="../assets/js/app.js"></script>
+</body>
+</html>

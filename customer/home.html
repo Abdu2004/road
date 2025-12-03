@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <title>Home - RoadBite</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="manifest" href="../manifest.json">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="home.html" class="logo"><img src="../assets/img/logo.png" alt="RoadBite"> RoadBite</a>
+            <a href="notifications.html" style="color: var(--text-primary); font-size: 24px; position: relative;">
+                <i class="fas fa-bell"></i>
+                <span style="position: absolute; top: -4px; right: -4px; background: var(--danger-color); color: white; border-radius: 50%; width: 18px; height: 18px; font-size: 10px; display: flex; align-items: center; justify-content: center; font-weight: 600;">3</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card">
+                <h1 style="font-size: 32px; margin-bottom: 8px;">Welcome back! <i class="fas fa-hand-wave"></i></h1>
+                <p style="color: var(--text-secondary);">Find delicious food on your route</p>
+            </div>
+
+            <!-- Wallet Quick View -->
+            <div class="card" style="background: var(--bg-gradient); color: white; padding: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <div>
+                        <p style="opacity: 0.9; font-size: 14px; margin-bottom: 4px;">Wallet Balance</p>
+                        <h2 style="font-size: 32px; font-weight: 700; margin: 0;">₦25,450.00</h2>
+                    </div>
+                    <a href="wallet.html" style="background: rgba(255,255,255,0.2); color: white; padding: 8px 16px; border-radius: var(--radius-sm); text-decoration: none; font-size: 14px;">
+                        <i class="fas fa-wallet"></i> View Wallet
+                    </a>
+                </div>
+                <div style="display: flex; gap: 12px;">
+                    <a href="wallet.html" onclick="event.preventDefault(); window.location.href='wallet.html'; setTimeout(() => showDepositModal(), 100);" style="flex: 1; background: rgba(255,255,255,0.9); color: var(--primary-color); padding: 12px; border-radius: var(--radius-sm); text-decoration: none; text-align: center; font-weight: 600; font-size: 14px;">
+                        <i class="fas fa-plus-circle"></i> Deposit
+                    </a>
+                    <a href="wallet.html" onclick="event.preventDefault(); window.location.href='wallet.html'; setTimeout(() => showWithdrawModal(), 100);" style="flex: 1; background: rgba(255,255,255,0.2); color: white; padding: 12px; border-radius: var(--radius-sm); text-decoration: none; text-align: center; font-weight: 600; font-size: 14px; border: 1px solid rgba(255,255,255,0.3);">
+                        <i class="fas fa-arrow-up"></i> Withdraw
+                    </a>
+                </div>
+            </div>
+
+            <!-- Recent Transactions Preview -->
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <h2 style="font-size: 18px; font-weight: 600; margin: 0;">Recent Transactions</h2>
+                    <a href="wallet.html" style="color: var(--primary-color); text-decoration: none; font-size: 14px; font-weight: 600;">See All →</a>
+                </div>
+
+                <div style="border-bottom: 1px solid var(--border-color); padding: 12px 0; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 36px; height: 36px; background: #d1fae5; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-plus" style="color: var(--success-color); font-size: 14px;"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600; font-size: 14px;">Wallet Top-up</div>
+                            <div style="font-size: 12px; color: var(--text-secondary);">Today • 10:30 AM</div>
+                        </div>
+                    </div>
+                    <div style="font-weight: 700; color: var(--success-color); font-size: 14px;">+₦5,000</div>
+                </div>
+
+                <div style="padding: 12px 0; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 36px; height: 36px; background: #fee2e2; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-shopping-bag" style="color: var(--danger-color); font-size: 14px;"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600; font-size: 14px;">Order Payment</div>
+                            <div style="font-size: 12px; color: var(--text-secondary);">Yesterday • 3:45 PM</div>
+                        </div>
+                    </div>
+                    <div style="font-weight: 700; color: var(--danger-color); font-size: 14px;">-₦1,250</div>
+                </div>
+            </div>
+
+            <!-- Route-based search -->
+            <div class="card" style="margin-bottom: 16px;">
+                <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 12px; color: var(--text-primary);">Plan Your Route</h2>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 12px;">Enter where you're going. We'll show food spots along the way — pre-order and pick up when you arrive.</p>
+                <div style="display: grid; grid-template-columns: 1fr; gap: 10px;">
+                    <div class="search-bar">
+                        <input type="text" class="search-input" placeholder="Start location (e.g., Ikeja)" id="routeStart">
+                        <span class="search-icon"><i class="fas fa-location-dot"></i></span>
+                    </div>
+                    <div class="search-bar">
+                        <input type="text" class="search-input" placeholder="Destination (e.g., Lekki)" id="routeEnd">
+                        <span class="search-icon"><i class="fas fa-flag-checkered"></i></span>
+                    </div>
+                    <button class="btn btn-primary" id="findRouteSpots" style="padding: 12px;">
+                        <i class="fas fa-route"></i> Find Spots Along Route
+                    </button>
+                </div>
+            </div>
+
+            <!-- Recent Searches -->
+            <div class="card">
+                <h2 style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text-primary);">Recent Searches</h2>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <span class="search-chip"><i class="fas fa-history" style="margin-right: 4px; font-size: 12px;"></i> Jollof Rice</span>
+                    <span class="search-chip"><i class="fas fa-history" style="margin-right: 4px; font-size: 12px;"></i> Suya Spots</span>
+                    <span class="search-chip"><i class="fas fa-history" style="margin-right: 4px; font-size: 12px;"></i> Amala & Ewedu</span>
+                    <span class="search-chip"><i class="fas fa-history" style="margin-right: 4px; font-size: 12px;"></i> Fried Rice</span>
+                    <span class="search-chip"><i class="fas fa-history" style="margin-right: 4px; font-size: 12px;"></i> Pepper Soup</span>
+                </div>
+            </div>
+
+            <!-- Saved Routes -->
+            <div class="card">
+                <h2 style="font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text-primary);">Saved Routes</h2>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="category-chip" data-route="ikeja|lekki">Home → Lekki</button>
+                    <button class="category-chip" data-route="ikeja|maryland">Home → Maryland</button>
+                    <button class="category-chip" data-route="ojodu|anthony">Ojodu → Anthony</button>
+                </div>
+            </div>
+
+            <!-- Category Filters -->
+            <div style="display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 8px;">
+                <button class="category-chip active" data-category="all">
+                    <i class="fas fa-utensils"></i> All
+                </button>
+                <button class="category-chip" data-category="nigerian">
+                    <i class="fas fa-flag"></i> Nigerian
+                </button>
+                <button class="category-chip" data-category="fast-food">
+                    <i class="fas fa-hamburger"></i> Fast Food
+                </button>
+                <button class="category-chip" data-category="bbq">
+                    <i class="fas fa-fire"></i> BBQ & Grills
+                </button>
+                <button class="category-chip" data-category="soups">
+                    <i class="fas fa-bowl-food"></i> Soups
+                </button>
+                <button class="category-chip" data-category="street-food">
+                    <i class="fas fa-pepper-hot"></i> Street Food
+                </button>
+            </div>
+
+            <h2 style="margin-bottom: 8px; font-size: 24px;">Spots Along Your Route</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 16px; font-size: 14px;">Pre-order and pick up. No delivery — RoadBite connects you with great food on your way.</p>
+            
+            <div class="grid grid-2" id="vendorGrid">
+                <a href="vendor-detail.html?id=1" class="vendor-card" data-category="nigerian soups" data-areas="ikeja mowe ojodu berger" style="text-decoration: none; color: inherit;">
+                    <div class="vendor-image"></div>
+                    <h3 class="vendor-name">Mama Nkechi's Kitchen</h3>
+                    <p class="vendor-info"><i class="fas fa-utensils"></i> Nigerian • Soups & Swallows</p>
+                    <p class="vendor-info"><i class="fas fa-map-marker-alt"></i> Lagos-Ibadan Exp, Mowe</p>
+                    <p class="vendor-info"><i class="fas fa-star" style="color: #fbbf24;"></i> 4.7 (120 reviews)</p>
+                    <div style="display:flex; gap:8px; margin-top:8px;">
+                        <span class="status-badge" style="background:#eef2ff; color:#3730a3;"><i class="fas fa-bag-shopping"></i> Pre-order pickup</span>
+                    </div>
+                </a>
+
+                <a href="vendor-detail.html?id=2" class="vendor-card" data-category="bbq fast-food" data-areas="ikeja maryland anthony lekki phase 1" style="text-decoration: none; color: inherit;">
+                    <div class="vendor-image"></div>
+                    <h3 class="vendor-name">The Spicy Grill Hub</h3>
+                    <p class="vendor-info"><i class="fas fa-fire"></i> Grills, BBQ, Fast Food</p>
+                    <p class="vendor-info"><i class="fas fa-map-marker-alt"></i> Lekki Phase 1, Lagos</p>
+                    <p class="vendor-info"><i class="fas fa-star" style="color: #fbbf24;"></i> 4.9 (198 reviews)</p>
+                    <div style="display:flex; gap:8px; margin-top:8px;">
+                        <span class="status-badge" style="background:#eef2ff; color:#3730a3;"><i class="fas fa-bag-shopping"></i> Pre-order pickup</span>
+                    </div>
+                </a>
+
+                <a href="vendor-detail.html?id=3" class="vendor-card" data-category="nigerian" data-areas="wuse maitama central area" style="text-decoration: none; color: inherit;">
+                    <div class="vendor-image"></div>
+                    <h3 class="vendor-name">Jollof & Chill Spot</h3>
+                    <p class="vendor-info"><i class="fas fa-drumstick-bite"></i> Modern Nigerian</p>
+                    <p class="vendor-info"><i class="fas fa-map-marker-alt"></i> Wuse 2, Abuja</p>
+                    <p class="vendor-info"><i class="fas fa-star" style="color: #fbbf24;"></i> 4.5 (89 reviews)</p>
+                    <div style="display:flex; gap:8px; margin-top:8px;">
+                        <span class="status-badge" style="background:#eef2ff; color:#3730a3;"><i class="fas fa-bag-shopping"></i> Pre-order pickup</span>
+                    </div>
+                </a>
+
+                <a href="vendor-detail.html?id=4" class="vendor-card" data-category="street-food bbq" data-areas="garki area 1 area 2 central area" style="text-decoration: none; color: inherit;">
+                    <div class="vendor-image"></div>
+                    <h3 class="vendor-name">Suya Delight Corner</h3>
+                    <p class="vendor-info"><i class="fas fa-pepper-hot"></i> Street Food, Suya Specialist</p>
+                    <p class="vendor-info"><i class="fas fa-map-marker-alt"></i> Garki, Abuja</p>
+                    <p class="vendor-info"><i class="fas fa-star" style="color: #fbbf24;"></i> 4.8 (156 reviews)</p>
+                    <div style="display:flex; gap:8px; margin-top:8px;">
+                        <span class="status-badge" style="background:#eef2ff; color:#3730a3;"><i class="fas fa-bag-shopping"></i> Pre-order pickup</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item active">
+            <span class="nav-icon"><i class="fas fa-home"></i></span>
+            <span>Home</span>
+        </a>
+        <a href="map.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-map"></i></span>
+            <span>Map</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-user"></i></span>
+            <span>Profile</span>
+        </a>
+        <a href="settings.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-cog"></i></span>
+            <span>Settings</span>
+        </a>
+    </nav>
+
+    <script src="../assets/js/app.js"></script>
+    <script>
+        // Category filtering functionality
+        document.querySelectorAll('.category-chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                // Remove active class from all chips
+                document.querySelectorAll('.category-chip').forEach(c => c.classList.remove('active'));
+                // Add active class to clicked chip
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                const vendorCards = document.querySelectorAll('.vendor-card');
+                
+                vendorCards.forEach(card => {
+                    if(category === 'all') {
+                        card.style.display = '';
+                    } else {
+                        const cardCategories = card.getAttribute('data-category') || '';
+                        if(cardCategories.includes(category)) {
+                            card.style.display = '';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+
+        // Route filtering: simple keyword match against vendor areas
+        const startInput = document.getElementById('routeStart');
+        const endInput = document.getElementById('routeEnd');
+        const findBtn = document.getElementById('findRouteSpots');
+
+        function normalize(text) {
+            return (text || '').toLowerCase().trim();
+        }
+
+        function matchesRoute(card, start, end) {
+            const areas = (card.getAttribute('data-areas') || '').toLowerCase();
+            const s = normalize(start);
+            const e = normalize(end);
+            // card is considered on-route if either start or end appears in its known areas
+            const startHit = s && areas.includes(s);
+            const endHit = e && areas.includes(e);
+            // if both provided, require at least one hit; if only one provided, use that
+            return (s && e) ? (startHit || endHit) : (startHit || endHit);
+        }
+
+        function filterByRoute() {
+            const start = startInput.value;
+            const end = endInput.value;
+            const cards = document.querySelectorAll('.vendor-card');
+            let anyVisible = false;
+            cards.forEach(card => {
+                if (matchesRoute(card, start, end)) {
+                    card.style.display = '';
+                    anyVisible = true;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            if (!anyVisible) {
+                // show a soft notice
+                showToast && showToast('No spots found on that route yet — try nearby areas.');
+            }
+        }
+
+        findBtn && findBtn.addEventListener('click', filterByRoute);
+        // Also filter when user presses Enter in destination field
+        endInput && endInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') filterByRoute();
+        });
+
+        // Saved routes quick apply + localStorage persistence
+        const savedRoutesKey = 'rb_saved_routes';
+        function getSavedRoutes() {
+            try { return JSON.parse(localStorage.getItem(savedRoutesKey) || '[]'); } catch { return []; }
+        }
+        function setSavedRoutes(routes) {
+            localStorage.setItem(savedRoutesKey, JSON.stringify(routes.slice(0, 6)));
+        }
+        function renderSavedRoutes() {
+            const container = document.querySelector('.card:nth-of-type(5) div'); // Saved routes chip container
+            const routes = getSavedRoutes();
+            if (!container) return;
+            // keep defaults, append stored
+            routes.forEach(r => {
+                const btn = document.createElement('button');
+                btn.className = 'category-chip';
+                btn.setAttribute('data-route', `${r.start}|${r.end}`);
+                btn.textContent = r.label || `${r.start} → ${r.end}`;
+                container.appendChild(btn);
+            });
+        }
+        renderSavedRoutes();
+
+        function attachRouteChipHandlers() {
+            document.querySelectorAll('[data-route]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const [start, end] = btn.getAttribute('data-route').split('|');
+                    document.getElementById('routeStart').value = start;
+                    document.getElementById('routeEnd').value = end;
+                    filterByRoute();
+                });
+            });
+        }
+        attachRouteChipHandlers();
+
+        // Save current route helper (could be triggered from a future UI button)
+        window.saveCurrentRoute = function(label) {
+            const start = document.getElementById('routeStart').value.trim();
+            const end = document.getElementById('routeEnd').value.trim();
+            if (!start || !end) { if (typeof showToast === 'function') showToast('Enter start and destination to save.'); return; }
+            const routes = getSavedRoutes();
+            routes.unshift({ start, end, label });
+            setSavedRoutes(routes);
+            renderSavedRoutes();
+            attachRouteChipHandlers();
+            if (typeof showToast === 'function') showToast('Route saved!');
+        }
+    </script>
+</body>
+</html>

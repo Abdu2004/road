@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ff6b35">
+  <title>RoadBite – Eat Along Your Route</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    :root {
+      --hero-bg: linear-gradient(135deg, rgba(255,107,53,0.1), rgba(255,159,28,0.12));
+    }
+    .landing {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      background: #fff;
+    }
+    .landing-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px; max-width: 960px; margin: 0 auto; width: 100%;
+    }
+    .landing-header .logo { display: flex; align-items: center; gap: 8px; font-weight: 800; color: var(--text-primary); text-decoration: none; }
+    .landing-header .logo img { width: 32px; height: 32px; }
+    .landing-header .actions { display: flex; gap: 8px; }
+    .hero {
+      max-width: 960px; margin: 0 auto; padding: 24px 16px; display: grid; gap: 16px;
+    }
+    .hero-card {
+      background: var(--hero-bg); border: 1px solid var(--border-color); border-radius: var(--radius-md);
+      padding: 20px; display: grid; grid-template-columns: 1fr; gap: 20px;
+    }
+    .hero h1 { font-size: 32px; margin: 0 0 8px; }
+    .hero p { color: var(--text-secondary); margin: 0 0 16px; }
+    .cta-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .gallery {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+    }
+    .gallery .tile { position: relative; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-sm); }
+    .gallery .tile img { width: 100%; height: 160px; object-fit: cover; display: block; }
+    .gallery .tile .label { position: absolute; left: 8px; bottom: 8px; background: rgba(0,0,0,0.5); color: #fff; padding: 6px 10px; border-radius: 12px; font-size: 12px; }
+    .features { display: grid; gap: 12px; grid-template-columns: 1fr; }
+    .feature { display: flex; gap: 12px; align-items: flex-start; background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 14px; }
+    .feature i { color: var(--primary-color); }
+    .footer { padding: 20px; text-align: center; color: var(--text-secondary); }
+    @media (min-width: 768px) {
+      .hero-card { grid-template-columns: 1.2fr 1fr; }
+      .gallery .tile img { height: 200px; }
+      .hero h1 { font-size: 40px; }
+    }
+  </style>
+</head>
+<body class="landing">
+  <header class="landing-header">
+    <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="RoadBite"> RoadBite</a>
+    <div class="actions">
+      <a href="customer/login.html" class="btn btn-secondary"><i class="fas fa-right-to-bracket"></i> Log In</a>
+      <a href="customer/signup.html" class="btn btn-primary"><i class="fas fa-user-plus"></i> Sign Up</a>
+    </div>
+  </header>
+
+  <main class="hero">
+    <div class="hero-card">
+      <div>
+        <h1>Find great food along your route</h1>
+        <p>RoadBite lets you pre‑order and pick up from restaurants on your way. No delivery, no waiting — just good food, ready when you arrive.</p>
+        <div class="cta-row">
+          <a href="customer/signup.html" class="btn btn-primary"><i class="fas fa-map"></i> Get Started</a>
+          <a href="customer/home.html" class="btn btn-secondary"><i class="fas fa-home"></i> Explore App</a>
+        </div>
+        <div style="margin-top: 16px; display:flex; gap:8px; align-items:center; color: var(--text-secondary);">
+          <i class="fas fa-shield-halved"></i>
+          <span>Secure checkout • Wallet support • Nigerian vendors</span>
+        </div>
+      </div>
+      <div>
+        <div class="gallery">
+          <div class="tile"><img src="assets/img/food1.jpg" alt="Featured dish"><span class="label">Jollof & Grill</span></div>
+          <div class="tile"><img src="assets/img/food2.jpg" alt="Featured dish"><span class="label">Suya Corner</span></div>
+          <div class="tile"><img src="assets/img/food3.jpg" alt="Featured dish"><span class="label">Soups & Swallows</span></div>
+          <div class="tile"><img src="assets/img/food4.jpg" alt="Featured dish"><span class="label">Fast Lunch</span></div>
+        </div>
+      </div>
+    </div>
+
+    <section class="features">
+      <div class="feature">
+        <i class="fas fa-route"></i>
+        <div>
+          <h3 style="margin:0 0 4px;">Route‑based pickup</h3>
+          <p style="margin:0; color: var(--text-secondary);">Enter your start and destination. We show food spots on your way — pre‑order and pick up.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <i class="fas fa-bag-shopping"></i>
+        <div>
+          <h3 style="margin:0 0 4px;">Ready when you arrive</h3>
+          <p style="margin:0; color: var(--text-secondary);">Choose pickup time. Your food is prepared and waiting — no delivery, no delay.</p>
+        </div>
+      </div>
+      <div class="feature">
+        <i class="fas fa-wallet"></i>
+        <div>
+          <h3 style="margin:0 0 4px;">Pay at restaurant or wallet</h3>
+          <p style="margin:0; color: var(--text-secondary);">Simple payment: pay at pickup or use your RoadBite wallet.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div style="margin-bottom:8px;">
+      <a href="customer/login.html" class="btn btn-secondary"><i class="fas fa-right-to-bracket"></i> Log In</a>
+      <a href="customer/signup.html" class="btn btn-primary"><i class="fas fa-user-plus"></i> Sign Up</a>
+    </div>
+    <small>© RoadBite • Made for Nigeria</small>
+  </footer>
+
+  <script>
+    // Optional: Fallback images if not present
+    ['food1','food2','food3','food4'].forEach(name => {
+      const img = document.querySelector(`img[src="assets/img/${name}.jpg"]`);
+      if (img) {
+        img.addEventListener('error', () => { img.src = 'assets/img/logo.png'; });
+      }
+    });
+  </script>
+</body>
+</html>

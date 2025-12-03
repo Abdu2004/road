@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff6b35">
+    <title>My Orders - RoadBite</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="manifest" href="../manifest.json">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="profile.html" style="color: var(--text-primary); font-size: 24px;"><i class="fas fa-arrow-left"></i></a>
+            <h1 style="margin: 0; font-size: 20px;">My Orders</h1>
+            <span style="width: 24px;"></span>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div style="display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 8px;">
+                <button class="btn btn-primary" style="padding: 8px 16px; font-size: 14px; white-space: nowrap;">All Orders</button>
+                <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 14px; white-space: nowrap;">In Progress</button>
+                <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 14px; white-space: nowrap;">Delivered</button>
+                <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 14px; white-space: nowrap;">Cancelled</button>
+            </div>
+
+            <!-- Active Pre-order (Pickup) -->
+            <div class="card" style="border: 2px solid var(--primary-color);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span class="status-badge" style="background: #fef3c7; color: #92400e;"><i class="fas fa-bag-shopping"></i> Pickup Pre-order</span>
+                    <span style="font-size: 12px; color: var(--text-secondary);">Order #RB-1234</span>
+                </div>
+                <h3 style="font-size: 18px; margin-bottom: 8px;">Mama Nkechi's Kitchen</h3>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 12px;">
+                    <i class="fas fa-utensils"></i> Egusi Soup with Pounded Yam × 1
+                </p>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="font-weight: 600;">Total: ₦1,700</span>
+                    <span style="font-size: 14px; color: var(--text-secondary);">Pickup: Today, 2:50 PM</span>
+                </div>
+                <div style="background: var(--bg-secondary); padding: 12px; border-radius: var(--radius-sm); margin-bottom: 12px;">
+                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                        <span class="status-badge" style="background:#dbeafe; color:#1e40af;"><i class="fas fa-check"></i> Accepted</span>
+                        <span class="status-badge" style="background:#fde68a; color:#92400e;"><i class="fas fa-fire"></i> Preparing</span>
+                        <span class="status-badge" style="background:#d1fae5; color:#065f46;"><i class="fas fa-hand-holding"></i> Ready for pickup</span>
+                    </div>
+                    <p style="font-size: 12px; color: var(--text-secondary);">We’ll notify you when your order is ready. Show your order code at the counter.</p>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-primary" id="viewCodeBtn" style="flex: 1; padding: 10px;">View Pickup Code</button>
+                    <button class="btn btn-secondary" id="markReadyBtn" style="flex: 1; padding: 10px;">Mark Ready</button>
+                </div>
+            </div>
+
+            <!-- Past Orders -->
+            <h2 style="font-size: 18px; margin: 24px 0 16px;">Past Orders</h2>
+
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span class="status-badge status-completed">Delivered</span>
+                    <span style="font-size: 12px; color: var(--text-secondary);">Order #1233</span>
+                </div>
+                <h3 style="font-size: 18px; margin-bottom: 8px;">The Spicy Grill Hub</h3>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 12px;">
+                    <i class="fas fa-fire"></i> Grilled Chicken with Fries × 2
+                </p>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="font-weight: 600;">Total: ₦4,500</span>
+                    <span style="font-size: 14px; color: var(--text-secondary);">Dec 2, 3:45 PM</span>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-primary" style="flex: 1; padding: 10px;"><i class="fas fa-star"></i> Rate Order</button>
+                    <button class="btn btn-secondary" style="flex: 1; padding: 10px;">Reorder</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span class="status-badge status-completed">Delivered</span>
+                    <span style="font-size: 12px; color: var(--text-secondary);">Order #1232</span>
+                </div>
+                <h3 style="font-size: 18px; margin-bottom: 8px;">Jollof & Chill Spot</h3>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 12px;">
+                    <i class="fas fa-drumstick-bite"></i> Jollof Rice with Chicken × 1, Fried Rice × 1
+                </p>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="font-weight: 600;">Total: ₦3,200</span>
+                    <span style="font-size: 14px; color: var(--text-secondary);">Dec 1, 7:20 PM</span>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-secondary" style="flex: 1; padding: 10px;">View Details</button>
+                    <button class="btn btn-secondary" style="flex: 1; padding: 10px;">Reorder</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span class="status-badge status-completed">Delivered</span>
+                    <span style="font-size: 12px; color: var(--text-secondary);">Order #1231</span>
+                </div>
+                <h3 style="font-size: 18px; margin-bottom: 8px;">Suya Delight Corner</h3>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 12px;">
+                    <i class="fas fa-pepper-hot"></i> Beef Suya (Large) × 1, Chapman × 2
+                </p>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="font-weight: 600;">Total: ₦2,800</span>
+                    <span style="font-size: 14px; color: var(--text-secondary);">Nov 30, 6:15 PM</span>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-secondary" style="flex: 1; padding: 10px;">View Details</button>
+                    <button class="btn btn-secondary" style="flex: 1; padding: 10px;">Reorder</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span class="status-badge status-cancelled">Cancelled</span>
+                    <span style="font-size: 12px; color: var(--text-secondary);">Order #1230</span>
+                </div>
+                <h3 style="font-size: 18px; margin-bottom: 8px;">Mama Nkechi's Kitchen</h3>
+                <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 12px;">
+                    <i class="fas fa-utensils"></i> Efo Riro with Eba × 1
+                </p>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <span style="font-weight: 600;">Total: ₦1,300</span>
+                    <span style="font-size: 14px; color: var(--text-secondary);">Nov 29, 1:30 PM</span>
+                </div>
+                <p style="font-size: 12px; color: var(--danger-color); background: #fee2e2; padding: 8px; border-radius: var(--radius-sm);">
+                    <i class="fas fa-info-circle"></i> Order cancelled by customer
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-home"></i></span>
+            <span>Home</span>
+        </a>
+        <a href="map.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-map"></i></span>
+            <span>Map</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-user"></i></span>
+            <span>Profile</span>
+        </a>
+        <a href="settings.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-cog"></i></span>
+            <span>Settings</span>
+        </a>
+    </nav>
+
+    <script src="../assets/js/app.js"></script>
+    <!-- Pickup Code Modal -->
+    <div class="modal hide" id="pickupCodeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Pickup Code</h3>
+                <button class="modal-close" id="closeCode"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" style="text-align:center;">
+                <p style="color: var(--text-secondary);">Show this at the counter:</p>
+                <div style="font-size: 32px; font-weight: 800; letter-spacing: 2px; margin: 8px 0;">RB-8421</div>
+                <p style="font-size: 12px; color: var(--text-tertiary);">Vendor: Mama Nkechi's Kitchen</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="copyCode"><i class="fas fa-copy"></i> Copy</button>
+                <button class="btn btn-primary" id="closeCode2">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Modal -->
+    <div class="modal hide" id="reviewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Rate Your Pickup</h3>
+                <button class="modal-close" id="closeReview"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div style="display:flex; gap:8px; margin-bottom:12px;">
+                    <button class="btn" data-star="1"><i class="fas fa-star"></i></button>
+                    <button class="btn" data-star="2"><i class="fas fa-star"></i></button>
+                    <button class="btn" data-star="3"><i class="fas fa-star"></i></button>
+                    <button class="btn" data-star="4"><i class="fas fa-star"></i></button>
+                    <button class="btn" data-star="5"><i class="fas fa-star"></i></button>
+                </div>
+                <textarea id="reviewText" class="form-input" rows="3" placeholder="Share your experience..." style="width:100%;"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancelReview">Skip</button>
+                <button class="btn btn-primary" id="submitReview"><i class="fas fa-paper-plane"></i> Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Pickup code modal logic
+        const codeModal = document.getElementById('pickupCodeModal');
+        const viewCodeBtn = document.getElementById('viewCodeBtn');
+        const closeCode = document.getElementById('closeCode');
+        const closeCode2 = document.getElementById('closeCode2');
+        const copyCode = document.getElementById('copyCode');
+        function openCode() { codeModal.classList.remove('hide'); codeModal.style.display = 'flex'; }
+        function closeCodeFn() { codeModal.classList.add('hide'); }
+        viewCodeBtn && viewCodeBtn.addEventListener('click', openCode);
+        closeCode && closeCode.addEventListener('click', closeCodeFn);
+        closeCode2 && closeCode2.addEventListener('click', closeCodeFn);
+        copyCode && copyCode.addEventListener('click', () => {
+            navigator.clipboard && navigator.clipboard.writeText('RB-8421');
+            if (typeof showToast === 'function') showToast('Pickup code copied');
+        });
+
+        // Ready -> Review flow
+        const markReadyBtn = document.getElementById('markReadyBtn');
+        const reviewModal = document.getElementById('reviewModal');
+        const closeReview = document.getElementById('closeReview');
+        const cancelReview = document.getElementById('cancelReview');
+        const submitReview = document.getElementById('submitReview');
+        function openReview() { reviewModal.classList.remove('hide'); reviewModal.style.display = 'flex'; }
+        function closeReviewFn() { reviewModal.classList.add('hide'); }
+        markReadyBtn && markReadyBtn.addEventListener('click', () => {
+            openReview();
+        });
+        closeReview && closeReview.addEventListener('click', closeReviewFn);
+        cancelReview && cancelReview.addEventListener('click', closeReviewFn);
+        submitReview && submitReview.addEventListener('click', () => {
+            closeReviewFn();
+            if (typeof showToast === 'function') showToast('Thanks! Your review was submitted.');
+        });
+        document.querySelectorAll('[data-star]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const val = parseInt(btn.getAttribute('data-star'), 10);
+                document.querySelectorAll('[data-star]').forEach(b => {
+                    const n = parseInt(b.getAttribute('data-star'), 10);
+                    b.style.color = n <= val ? '#fbbf24' : 'var(--text-secondary)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

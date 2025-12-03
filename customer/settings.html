@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <title>Settings - RoadBite</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="manifest" href="../manifest.json">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="home.html" class="logo"><img src="../assets/img/logo.png" alt="RoadBite"> RoadBite</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card">
+                <h1 style="font-size: 28px; margin-bottom: 8px;">Settings</h1>
+                <p style="color: var(--text-secondary);">Manage your preferences</p>
+            </div>
+
+            <div class="card">
+                <h2 class="card-header">Preferences</h2>
+
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Dark Mode</div>
+                        <p style="color: var(--text-secondary); font-size: 14px;">Enable dark theme</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="darkMode">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Notifications</div>
+                        <p style="color: var(--text-secondary); font-size: 14px;">Receive push notifications</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="notifications" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-item">
+                    <div>
+                        <div class="setting-label">Location Services</div>
+                        <p style="color: var(--text-secondary); font-size: 14px;">Allow location access</p>
+                    </div>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="location" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 class="card-header">Account</h2>
+
+                <button class="btn btn-secondary btn-block mb-2">Change Password</button>
+                <button class="btn btn-secondary btn-block mb-2">Payment Methods</button>
+                <a href="faq.html" class="btn btn-secondary btn-block mb-2">FAQ & Help</a>
+            </div>
+
+            <div class="card">
+                <h2 class="card-header">About</h2>
+                <div class="info-item">
+                    <span class="info-label">Version</span>
+                    <span class="info-value">1.0.0</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Terms of Service</span>
+                    <span class="info-value">→</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Privacy Policy</span>
+                    <span class="info-value">→</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-home"></i></span>
+            <span>Home</span>
+        </a>
+        <a href="map.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-map"></i></span>
+            <span>Map</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-user"></i></span>
+            <span>Profile</span>
+        </a>
+        <a href="settings.html" class="nav-item active">
+            <span class="nav-icon"><i class="fas fa-cog"></i></span>
+            <span>Settings</span>
+        </a>
+    </nav>
+
+    <script src="../assets/js/app.js"></script>
+</body>
+</html>

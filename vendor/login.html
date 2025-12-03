@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <title>Vendor Login - RoadBite</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="manifest" href="../manifest.json">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1><img src="../assets/img/logo.png" alt="RoadBite" style="height: 40px; vertical-align: middle;"> RoadBite Vendor</h1>
+                <p>Sign in to manage your business</p>
+            </div>
+
+            <form id="loginForm" onsubmit="handleLogin(event, 'vendor')">
+                <div class="form-group">
+                    <label for="email" class="form-label">Email or Phone</label>
+                    <input type="text" id="email" class="form-input" placeholder="Enter your email or phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+
+            <div class="auth-footer">
+                <p>Need help? <a href="#">Contact Support</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff6b35">
+    <title>Notifications - RoadBite</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="manifest" href="../manifest.json">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="home.html" style="color: var(--text-primary); font-size: 24px;"><i class="fas fa-arrow-left"></i></a>
+            <h1 style="margin: 0; font-size: 20px;">Notifications</h1>
+            <span style="width: 24px;"></span>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                    <h2 style="font-size: 18px; margin: 0;">Today</h2>
+                    <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 14px;">Mark all as read</button>
+                </div>
+
+                <div class="notification-item unread">
+                    <div class="notification-icon" style="background: #d1fae5;">
+                        <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                    </div>
+                    <div class="notification-content">
+                        <h3>Order Delivered!</h3>
+                        <p>Your order from Mama Nkechi's Kitchen has been delivered. Enjoy your meal!</p>
+                        <span class="notification-time">10 minutes ago</span>
+                    </div>
+                </div>
+
+                <div class="notification-item unread">
+                    <div class="notification-icon" style="background: #fef3c7;">
+                        <i class="fas fa-motorcycle" style="color: var(--warning-color);"></i>
+                    </div>
+                    <div class="notification-content">
+                        <h3>Order on the way</h3>
+                        <p>Your order is being prepared and will arrive in 25 minutes</p>
+                        <span class="notification-time">1 hour ago</span>
+                    </div>
+                </div>
+
+                <div class="notification-item unread">
+                    <div class="notification-icon" style="background: #dbeafe;">
+                        <i class="fas fa-money-bill-wave" style="color: #2563eb;"></i>
+                    </div>
+                    <div class="notification-content">
+                        <h3>Wallet Credited</h3>
+                        <p>Your wallet has been credited with ₦5,000.00</p>
+                        <span class="notification-time">2 hours ago</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2 style="font-size: 18px; margin-bottom: 16px;">Earlier</h2>
+
+                <div class="notification-item">
+                    <div class="notification-icon" style="background: #fee2e2;">
+                        <i class="fas fa-star" style="color: var(--warning-color);"></i>
+                    </div>
+                    <div class="notification-content">
+                        <h3>Rate your order</h3>
+                        <p>How was your experience with The Spicy Grill Hub?</p>
+                        <span class="notification-time">Yesterday</span>
+                    </div>
+                </div>
+
+                <div class="notification-item">
+                    <div class="notification-icon" style="background: #e0e7ff;">
+                        <i class="fas fa-gift" style="color: #6366f1;"></i>
+                    </div>
+                    <div class="notification-content">
+                        <h3>Special Offer!</h3>
+                        <p>Get 20% off on your next order at Jollof & Chill Spot</p>
+                        <span class="notification-time">2 days ago</span>
+                    </div>
+                </div>
+
+                <div class="notification-item">
+                    <div class="notification-icon" style="background: #fce7f3;">
+                        <i class="fas fa-heart" style="color: #ec4899;"></i>
+                    </div>
+                    <div class="notification-content">
+                        <h3>New favorite spot nearby</h3>
+                        <p>Suya Delight Corner is now available in your area</p>
+                        <span class="notification-time">3 days ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-home"></i></span>
+            <span>Home</span>
+        </a>
+        <a href="map.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-map"></i></span>
+            <span>Map</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-user"></i></span>
+            <span>Profile</span>
+        </a>
+        <a href="settings.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-cog"></i></span>
+            <span>Settings</span>
+        </a>
+    </nav>
+
+    <script src="../assets/js/app.js"></script>
+</body>
+</html>

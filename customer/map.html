@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#2563eb">
+    <title>Map - RoadBite</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="home.html" class="logo"><img src="../assets/img/logo.png" alt="RoadBite"> RoadBite</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card">
+                <h1 style="font-size: 24px; margin-bottom: 8px;">Route Corridor (Pickup Only)</h1>
+                <p style="color: var(--text-secondary); margin-bottom: 12px;">Draw your route — we highlight vendors roughly along the way. If you add a Google Maps API key, you’ll get real directions.</p>
+                <div class="map-controls" style="display:flex; gap:8px;">
+                    <input type="text" class="form-input" placeholder="Start (e.g., Ikeja)" id="mapStart" style="flex: 1;">
+                    <input type="text" class="form-input" placeholder="Destination (e.g., Lekki)" id="mapEnd" style="flex: 1;">
+                    <button class="btn btn-primary" id="drawRoute"><i class="fas fa-route"></i> Draw Route</button>
+                </div>
+            </div>
+
+            <div id="map"></div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-home"></i></span>
+            <span>Home</span>
+        </a>
+        <a href="map.html" class="nav-item active">
+            <span class="nav-icon"><i class="fas fa-map"></i></span>
+            <span>Map</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-user"></i></span>
+            <span>Profile</span>
+        </a>
+        <a href="settings.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-cog"></i></span>
+            <span>Settings</span>
+        </a>
+    </nav>
+
+    <script src="../assets/js/app.js"></script>
+    <script>
+        // Try Google Maps if API key exists in localStorage under 'rb_google_maps_key'.
+        const GMAPS_KEY = localStorage.getItem('rb_google_maps_key');
+
+        function initLeafletFallback() {
+            const map = L.map('map').setView([6.5244, 3.3792], 11); // Lagos default
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap'
+            }).addTo(map);
+
+            const knownPoints = {
+                ikeja: [6.6018, 3.3515],
+                maryland: [6.5706, 3.3718],
+                anthony: [6.5569, 3.3676],
+                lekki: [6.4365, 3.4516],
+                'lekki phase 1': [6.4402, 3.4841],
+                ojodu: [6.6485, 3.3641],
+                berger: [6.6650, 3.3869]
+            };
+
+            let routeLayer = null;
+            document.getElementById('drawRoute').addEventListener('click', () => {
+                const s = (document.getElementById('mapStart').value || '').toLowerCase().trim();
+                const e = (document.getElementById('mapEnd').value || '').toLowerCase().trim();
+                if (!knownPoints[s] || !knownPoints[e]) {
+                    if (typeof showToast === 'function') showToast('Try known areas like Ikeja, Maryland, Anthony, Lekki Phase 1.');
+                    return;
+                }
+                if (routeLayer) routeLayer.remove();
+                const start = knownPoints[s];
+                const end = knownPoints[e];
+                routeLayer = L.polyline([start, end], { color: '#ff6b35', weight: 5 }).addTo(map);
+                map.fitBounds(routeLayer.getBounds(), { padding: [20, 20] });
+            });
+        }
+
+        function initGoogleMaps() {
+            // Set up a basic Google Map and Directions rendering
+            const lagosCenter = { lat: 6.5244, lng: 3.3792 };
+            const map = new google.maps.Map(document.getElementById('map'), {
+                center: lagosCenter,
+                zoom: 11,
+                mapTypeControl: false,
+                streetViewControl: false
+            });
+            const directionsService = new google.maps.DirectionsService();
+            const directionsRenderer = new google.maps.DirectionsRenderer({
+                map,
+                polylineOptions: { strokeColor: '#ff6b35', strokeWeight: 6 }
+            });
+
+            document.getElementById('drawRoute').addEventListener('click', () => {
+                const origin = (document.getElementById('mapStart').value || '').trim();
+                const destination = (document.getElementById('mapEnd').value || '').trim();
+                if (!origin || !destination) {
+                    if (typeof showToast === 'function') showToast('Enter both start and destination.');
+                    return;
+                }
+                directionsService.route({
+                    origin,
+                    destination,
+                    travelMode: google.maps.TravelMode.DRIVING
+                }, (result, status) => {
+                    if (status === google.maps.DirectionsStatus.OK) {
+                        directionsRenderer.setDirections(result);
+                    } else {
+                        if (typeof showToast === 'function') showToast('Could not compute route. Try more specific locations.');
+                    }
+                });
+            });
+        }
+
+        function loadGoogleMapsThenInit() {
+            const script = document.createElement('script');
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${GMAPS_KEY}`;
+            script.async = true;
+            script.defer = true;
+            script.onload = () => {
+                if (window.google && window.google.maps) {
+                    initGoogleMaps();
+                    if (typeof showToast === 'function') showToast('Google Maps enabled with live directions.');
+                } else {
+                    initLeafletFallback();
+                }
+            };
+            script.onerror = () => {
+                initLeafletFallback();
+            };
+            document.head.appendChild(script);
+        }
+
+        if (GMAPS_KEY) {
+            loadGoogleMapsThenInit();
+        } else {
+            initLeafletFallback();
+        }
+    </script>
+</body>
+</html>

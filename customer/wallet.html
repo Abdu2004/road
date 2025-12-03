@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#ff6b35">
+    <title>Wallet - RoadBite</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="manifest" href="../manifest.json">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="home.html" class="logo"><img src="../assets/img/logo.png" alt="RoadBite"> RoadBite</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="card">
+                <h1 style="font-size: 28px; margin-bottom: 8px;"><i class="fas fa-wallet"></i> My Wallet</h1>
+                <p style="color: var(--text-secondary);">Manage your funds and transactions</p>
+            </div>
+
+            <!-- Wallet Balance Card -->
+            <div class="card" style="background: var(--bg-gradient); color: white; text-align: center;">
+                <p style="opacity: 0.9; margin-bottom: 8px;">Available Balance</p>
+                <h2 style="font-size: 48px; font-weight: 700; margin-bottom: 8px;">₦25,450.00</h2>
+                <p style="opacity: 0.8; font-size: 14px;">Last updated: Just now</p>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="grid grid-2" style="margin-bottom: 20px;">
+                <button class="btn btn-primary btn-block" onclick="showDepositModal()">
+                    <i class="fas fa-plus-circle"></i> Deposit Money
+                </button>
+                <button class="btn btn-secondary btn-block" onclick="showWithdrawModal()">
+                    <i class="fas fa-arrow-circle-up"></i> Withdraw
+                </button>
+            </div>
+
+            <!-- Transaction History -->
+            <div class="card">
+                <h2 class="card-header">Recent Transactions</h2>
+
+                <div style="border-bottom: 1px solid var(--border-color); padding: 16px 0; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; background: #d1fae5; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-plus" style="color: var(--success-color);"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600;">Wallet Top-up</div>
+                            <div style="font-size: 14px; color: var(--text-secondary);">Dec 3, 2025 • 10:30 AM</div>
+                        </div>
+                    </div>
+                    <div style="font-weight: 700; color: var(--success-color);">+₦5,000.00</div>
+                </div>
+
+                <div style="border-bottom: 1px solid var(--border-color); padding: 16px 0; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; background: #fee2e2; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-shopping-bag" style="color: var(--danger-color);"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600;">Order Payment</div>
+                            <div style="font-size: 14px; color: var(--text-secondary);">Dec 2, 2025 • 3:45 PM</div>
+                        </div>
+                    </div>
+                    <div style="font-weight: 700; color: var(--danger-color);">-₦1,250.00</div>
+                </div>
+
+                <div style="border-bottom: 1px solid var(--border-color); padding: 16px 0; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; background: #dbeafe; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-arrow-up" style="color: #2563eb;"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600;">Withdrawal</div>
+                            <div style="font-size: 14px; color: var(--text-secondary);">Dec 1, 2025 • 11:20 AM</div>
+                        </div>
+                    </div>
+                    <div style="font-weight: 700; color: var(--danger-color);">-₦10,000.00</div>
+                </div>
+
+                <div style="border-bottom: 1px solid var(--border-color); padding: 16px 0; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; background: #d1fae5; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-plus" style="color: var(--success-color);"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600;">Wallet Top-up</div>
+                            <div style="font-size: 14px; color: var(--text-secondary);">Nov 30, 2025 • 2:15 PM</div>
+                        </div>
+                    </div>
+                    <div style="font-weight: 700; color: var(--success-color);">+₦15,000.00</div>
+                </div>
+
+                <div style="padding: 16px 0; display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; background: #fee2e2; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-shopping-bag" style="color: var(--danger-color);"></i>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600;">Order Payment</div>
+                            <div style="font-size: 14px; color: var(--text-secondary);">Nov 29, 2025 • 5:30 PM</div>
+                        </div>
+                    </div>
+                    <div style="font-weight: 700; color: var(--danger-color);">-₦2,450.00</div>
+                </div>
+
+                <button class="btn btn-secondary btn-block mt-2">View All Transactions</button>
+            </div>
+
+            <!-- Stats -->
+            <div class="grid grid-3">
+                <div class="stat-card">
+                    <div class="stat-value" style="color: var(--success-color);">₦28,500</div>
+                    <div class="stat-label">Total Deposits</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color: var(--danger-color);">₦13,050</div>
+                    <div class="stat-label">Total Spent</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" style="color: #2563eb;">₦10,000</div>
+                    <div class="stat-label">Total Withdrawn</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Deposit Modal -->
+    <div id="depositModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-plus-circle"></i> Deposit Money</h2>
+                <span class="close" onclick="closeDepositModal()">&times;</span>
+            </div>
+            <form id="depositForm" onsubmit="handleDeposit(event)">
+                <div class="form-group">
+                    <label for="depositAmount" class="form-label">Amount (₦)</label>
+                    <input type="number" id="depositAmount" class="form-input" placeholder="Enter amount" min="100" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentMethod" class="form-label">Payment Method</label>
+                    <select id="paymentMethod" class="form-input" required>
+                        <option value="">Select payment method</option>
+                        <option value="card">Debit/Credit Card</option>
+                        <option value="bank">Bank Transfer</option>
+                        <option value="ussd">USSD</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Continue to Payment</button>
+                <button type="button" class="btn btn-secondary btn-block mt-2" onclick="closeDepositModal()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Withdraw Modal -->
+    <div id="withdrawModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-arrow-circle-up"></i> Withdraw Money</h2>
+                <span class="close" onclick="closeWithdrawModal()">&times;</span>
+            </div>
+            <form id="withdrawForm" onsubmit="handleWithdraw(event)">
+                <div class="form-group">
+                    <label for="withdrawAmount" class="form-label">Amount (₦)</label>
+                    <input type="number" id="withdrawAmount" class="form-input" placeholder="Enter amount" min="1000" max="25450" required>
+                    <small style="color: var(--text-secondary);">Available balance: ₦25,450.00</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="bankName" class="form-label">Bank Name</label>
+                    <select id="bankName" class="form-input" required>
+                        <option value="">Select your bank</option>
+                        <option value="gtb">GTBank</option>
+                        <option value="access">Access Bank</option>
+                        <option value="first">First Bank</option>
+                        <option value="zenith">Zenith Bank</option>
+                        <option value="uba">UBA</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="accountNumber" class="form-label">Account Number</label>
+                    <input type="text" id="accountNumber" class="form-input" placeholder="Enter account number" maxlength="10" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="accountName" class="form-label">Account Name</label>
+                    <input type="text" id="accountName" class="form-input" placeholder="Account name will appear here" readonly>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Withdraw Funds</button>
+                <button type="button" class="btn btn-secondary btn-block mt-2" onclick="closeWithdrawModal()">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-home"></i></span>
+            <span>Home</span>
+        </a>
+        <a href="map.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-map"></i></span>
+            <span>Map</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-user"></i></span>
+            <span>Profile</span>
+        </a>
+        <a href="settings.html" class="nav-item">
+            <span class="nav-icon"><i class="fas fa-cog"></i></span>
+            <span>Settings</span>
+        </a>
+    </nav>
+
+    <script src="../assets/js/app.js"></script>
+    <script>
+        // Deposit Modal Functions
+        function showDepositModal() {
+            document.getElementById('depositModal').style.display = 'flex';
+        }
+
+        function closeDepositModal() {
+            document.getElementById('depositModal').style.display = 'none';
+        }
+
+        function handleDeposit(e) {
+            e.preventDefault();
+            const amount = document.getElementById('depositAmount').value;
+            const method = document.getElementById('paymentMethod').value;
+            
+            showToast(`Processing deposit of ₦${parseFloat(amount).toLocaleString()}...`);
+            closeDepositModal();
+            
+            // Simulate payment processing
+            setTimeout(() => {
+                showToast('Deposit successful!');
+            }, 2000);
+        }
+
+        // Withdraw Modal Functions
+        function showWithdrawModal() {
+            document.getElementById('withdrawModal').style.display = 'flex';
+        }
+
+        function closeWithdrawModal() {
+            document.getElementById('withdrawModal').style.display = 'none';
+        }
+
+        function handleWithdraw(e) {
+            e.preventDefault();
+            const amount = document.getElementById('withdrawAmount').value;
+            const bank = document.getElementById('bankName').value;
+            const accountNumber = document.getElementById('accountNumber').value;
+            
+            if (!validateWithdrawal(amount)) {
+                return;
+            }
+            
+            showToast(`Processing withdrawal of ₦${parseFloat(amount).toLocaleString()}...`);
+            closeWithdrawModal();
+            
+            // Simulate withdrawal processing
+            setTimeout(() => {
+                showToast('Withdrawal request submitted successfully!');
+            }, 2000);
+        }
+
+        function validateWithdrawal(amount) {
+            const balance = 25450;
+            if (parseFloat(amount) > balance) {
+                showToast('Insufficient balance');
+                return false;
+            }
+            if (parseFloat(amount) < 1000) {
+                showToast('Minimum withdrawal is ₦1,000');
+                return false;
+            }
+            return true;
+        }
+
+        // Account Number Verification (Simulate)
+        document.getElementById('accountNumber')?.addEventListener('input', function(e) {
+            if (e.target.value.length === 10) {
+                // Simulate account name lookup
+                setTimeout(() => {
+                    document.getElementById('accountName').value = 'JOHN DOE';
+                }, 500);
+            } else {
+                document.getElementById('accountName').value = '';
+            }
+        });
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const depositModal = document.getElementById('depositModal');
+            const withdrawModal = document.getElementById('withdrawModal');
+            if (event.target == depositModal) {
+                closeDepositModal();
+            }
+            if (event.target == withdrawModal) {
+                closeWithdrawModal();
+            }
+        }
+    </script>
+</body>
+</html>
