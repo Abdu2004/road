@@ -22,15 +22,43 @@
         <div class="container">
             <div class="card">
                 <h1 style="font-size: 24px; margin-bottom: 8px;">Route Corridor (Pickup Only)</h1>
-                <p style="color: var(--text-secondary); margin-bottom: 12px;">Draw your route — we highlight vendors roughly along the way. If you add a Google Maps API key, you’ll get real directions.</p>
-                <div class="map-controls" style="display:flex; gap:8px;">
-                    <input type="text" class="form-input" placeholder="Start (e.g., Ikeja)" id="mapStart" style="flex: 1;">
-                    <input type="text" class="form-input" placeholder="Destination (e.g., Lekki)" id="mapEnd" style="flex: 1;">
-                    <button class="btn btn-primary" id="drawRoute"><i class="fas fa-route"></i> Draw Route</button>
+                <p style="color: var(--text-secondary); margin-bottom: 12px;">Enter your origin and destination and we’ll fetch the fastest OSRM road path plus RoadBite vendors nearby.</p>
+                <div class="map-controls" style="display:flex; gap:8px; flex-wrap: wrap;">
+                    <input type="text" class="form-input" placeholder="Start (e.g., Ikeja City Mall)" id="mapStart" style="flex: 1; min-width:200px;">
+                    <input type="text" class="form-input" placeholder="Destination (e.g., Lekki Phase 1)" id="mapEnd" style="flex: 1; min-width:200px;">
+                    <button class="btn btn-primary" id="drawRoute" style="min-width:150px;"><i class="fas fa-route"></i> Get Route</button>
+                </div>
+                <div id="routeSummary" style="margin-top:12px; background: var(--bg-secondary); border-radius: var(--radius-md); padding:12px; display:none;">
+                    <p style="margin:0; font-weight:600;">Route Summary</p>
+                    <p style="margin:4px 0 0; color: var(--text-secondary); font-size:14px;" id="routeMeta">Distance — Duration</p>
+                </div>
+
+                <div class="poi-chips">
+                    <button class="poi-chip active" data-category="all"><i class="fas fa-layer-group"></i>All spots</button>
+                    <button class="poi-chip" data-category="food"><i class="fas fa-bowl-food"></i>Food courts</button>
+                    <button class="poi-chip" data-category="coffee"><i class="fas fa-mug-hot"></i>Cafés</button>
+                    <button class="poi-chip" data-category="grocery"><i class="fas fa-shopping-basket"></i>Groceries</button>
+                    <button class="poi-chip" data-category="nightlife"><i class="fas fa-music"></i>Nightlife</button>
                 </div>
             </div>
 
-            <div id="map"></div>
+            <div class="map-shell">
+                <div id="map"></div>
+                <div class="map-fab-group">
+                    <button class="map-button locate" id="locateUser"><i class="fas fa-location-crosshairs"></i> Locate me</button>
+                    <button class="map-button" id="recenterRoute"><i class="fas fa-bullseye"></i> Recenter</button>
+                </div>
+            </div>
+
+            <div id="locationStatus" class="map-alert" style="display:none;">
+                <i class="fas fa-info-circle"></i>
+                <span>Detecting your location…</span>
+            </div>
+
+            <div class="card" id="vendorResults" style="display:none;">
+                <h2 style="font-size: 18px; margin-bottom: 8px;">Vendors along this route</h2>
+                <div id="vendorList" style="display:flex; flex-direction:column; gap:8px;"></div>
+            </div>
         </div>
     </main>
 
@@ -55,102 +83,301 @@
 
     <script src="../assets/js/app.js"></script>
     <script>
-        // Try Google Maps if API key exists in localStorage under 'rb_google_maps_key'.
-        const GMAPS_KEY = localStorage.getItem('rb_google_maps_key');
+        const map = L.map('map').setView([6.5244, 3.3792], 11);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
 
-        function initLeafletFallback() {
-            const map = L.map('map').setView([6.5244, 3.3792], 11); // Lagos default
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
-                attribution: '© OpenStreetMap'
-            }).addTo(map);
+        const vendorData = [
+            { name: "Mama Nkechi's Kitchen", cuisine: 'Soups & Swallows', lat: 6.6018, lng: 3.3515, rating: 4.8, reviews: 182, status: 'open', leadTime: '20-25 mins', address: '23 Allen Ave, Ikeja' },
+            { name: 'The Spicy Grill Hub', cuisine: 'BBQ & Grills', lat: 6.4452, lng: 3.4845, rating: 4.6, reviews: 95, status: 'open', leadTime: '30-35 mins', address: '12 Admiralty Way, Lekki' },
+            { name: 'Jollof & Chill Spot', cuisine: 'Rice dishes', lat: 6.4531, lng: 3.3958, rating: 4.5, reviews: 143, status: 'closed', leadTime: 'Preorder', address: '14 Adeola Odeku, VI' },
+            { name: 'Suya Delight Corner', cuisine: 'Street Food', lat: 6.5099, lng: 3.3715, rating: 4.7, reviews: 210, status: 'open', leadTime: '15-20 mins', address: '19 Mobolaji Bank Anthony, Ikeja' }
+        ];
 
-            const knownPoints = {
-                ikeja: [6.6018, 3.3515],
-                maryland: [6.5706, 3.3718],
-                anthony: [6.5569, 3.3676],
-                lekki: [6.4365, 3.4516],
-                'lekki phase 1': [6.4402, 3.4841],
-                ojodu: [6.6485, 3.3641],
-                berger: [6.6650, 3.3869]
-            };
+        const poiData = [
+            { name: 'Mega Plaza Food Court', category: 'food', lat: 6.4384, lng: 3.4176, note: 'Lunch-friendly stalls in Victoria Island.' },
+            { name: 'Cafe One Lekki', category: 'coffee', lat: 6.4413, lng: 3.4826, note: 'Co-working cafe with fast WiFi.' },
+            { name: 'Farm City Market', category: 'grocery', lat: 6.4367, lng: 3.4706, note: 'Late-night grocery pickup.' },
+            { name: 'Upbeat Rooftop Lounge', category: 'nightlife', lat: 6.4358, lng: 3.4789, note: 'Live DJs by the water.' },
+            { name: 'Terra Kulture Canteen', category: 'food', lat: 6.4308, lng: 3.4210, note: 'Culture hub with hearty meals.' },
+            { name: 'Oga Coffee Bar', category: 'coffee', lat: 6.5240, lng: 3.3673, note: 'Grab-and-go espresso in Ikeja.' }
+        ];
 
-            let routeLayer = null;
-            document.getElementById('drawRoute').addEventListener('click', () => {
-                const s = (document.getElementById('mapStart').value || '').toLowerCase().trim();
-                const e = (document.getElementById('mapEnd').value || '').toLowerCase().trim();
-                if (!knownPoints[s] || !knownPoints[e]) {
-                    if (typeof showToast === 'function') showToast('Try known areas like Ikeja, Maryland, Anthony, Lekki Phase 1.');
-                    return;
-                }
-                if (routeLayer) routeLayer.remove();
-                const start = knownPoints[s];
-                const end = knownPoints[e];
-                routeLayer = L.polyline([start, end], { color: '#ff6b35', weight: 5 }).addTo(map);
-                map.fitBounds(routeLayer.getBounds(), { padding: [20, 20] });
+        const vendorIcon = L.icon({
+            iconUrl: '../assets/img/logo.png',
+            iconSize: [38, 38],
+            iconAnchor: [19, 38],
+            popupAnchor: [0, -30],
+            className: 'vendor-marker'
+        });
+
+        function vendorPopupTemplate(vendor) {
+            const isOpen = vendor.status === 'open';
+            const statusLabel = isOpen ? 'Open now' : 'Closed';
+            return `
+                <div class="vendor-popup">
+                    <h4>${vendor.name}</h4>
+                    <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
+                        <span class="status ${isOpen ? 'open' : 'closed'}"><i class="fas fa-circle"></i>${statusLabel}</span>
+                        <span style="font-size:13px;"><i class="fas fa-star" style="color:#f59e0b;"></i> ${vendor.rating.toFixed(1)} (${vendor.reviews})</span>
+                    </div>
+                    <p>${vendor.cuisine} • ${vendor.leadTime}</p>
+                    <p style="margin-top:6px;">${vendor.address}</p>
+                </div>
+            `;
+        }
+
+        const vendorMarkers = vendorData.map(v => {
+            const marker = L.marker([v.lat, v.lng], { icon: vendorIcon, opacity: 0.4 }).addTo(map);
+            marker.bindPopup(vendorPopupTemplate(v));
+            return { ...v, marker };
+        });
+
+        const poiLayer = L.layerGroup().addTo(map);
+
+        let routeLayer = null;
+        const ROUTE_PROFILE = 'driving';
+        const ROUTE_LABEL = 'Car';
+        let lastQuery = null;
+        let lastRouteBounds = null;
+        let userMarker = null;
+        let userAccuracy = null;
+
+        const poiChips = document.querySelectorAll('.poi-chip');
+        const vendorResults = document.getElementById('vendorResults');
+        const vendorList = document.getElementById('vendorList');
+        const locationStatus = document.getElementById('locationStatus');
+
+        poiChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                poiChips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                renderPOIs(chip.dataset.category);
+            });
+        });
+
+        function renderPOIs(category = 'all') {
+            poiLayer.clearLayers();
+            poiData.forEach(point => {
+                if (category !== 'all' && point.category !== category) return;
+                const marker = L.marker([point.lat, point.lng], { title: point.name }).addTo(poiLayer);
+                marker.bindPopup(`<strong>${point.name}</strong><br><span style="color:var(--text-secondary); font-size:13px;">${point.note}</span>`);
             });
         }
 
-        function initGoogleMaps() {
-            // Set up a basic Google Map and Directions rendering
-            const lagosCenter = { lat: 6.5244, lng: 3.3792 };
-            const map = new google.maps.Map(document.getElementById('map'), {
-                center: lagosCenter,
-                zoom: 11,
-                mapTypeControl: false,
-                streetViewControl: false
-            });
-            const directionsService = new google.maps.DirectionsService();
-            const directionsRenderer = new google.maps.DirectionsRenderer({
-                map,
-                polylineOptions: { strokeColor: '#ff6b35', strokeWeight: 6 }
-            });
+        renderPOIs('all');
 
-            document.getElementById('drawRoute').addEventListener('click', () => {
-                const origin = (document.getElementById('mapStart').value || '').trim();
-                const destination = (document.getElementById('mapEnd').value || '').trim();
-                if (!origin || !destination) {
-                    if (typeof showToast === 'function') showToast('Enter both start and destination.');
-                    return;
-                }
-                directionsService.route({
-                    origin,
-                    destination,
-                    travelMode: google.maps.TravelMode.DRIVING
-                }, (result, status) => {
-                    if (status === google.maps.DirectionsStatus.OK) {
-                        directionsRenderer.setDirections(result);
-                    } else {
-                        if (typeof showToast === 'function') showToast('Could not compute route. Try more specific locations.');
+        function showLocationStatus(message, tone = 'info') {
+            if (!locationStatus) return;
+            const icon = tone === 'error' ? 'fa-triangle-exclamation' : 'fa-location-crosshairs';
+            locationStatus.innerHTML = `<i class="fas ${icon}"></i><span>${message}</span>`;
+            locationStatus.classList.toggle('error', tone === 'error');
+            locationStatus.style.display = 'flex';
+        }
+
+        function hideLocationStatus() {
+            if (!locationStatus) return;
+            locationStatus.style.display = 'none';
+        }
+
+        async function geocode(place) {
+            const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(place)}&limit=1`;
+            const res = await fetch(url, { headers: { 'User-Agent': 'RoadBite/1.0' } });
+            const data = await res.json();
+            if (!data.length) throw new Error('Location not found');
+            return { lat: parseFloat(data[0].lat), lon: parseFloat(data[0].lon) };
+        }
+
+        function km(meters) {
+            return (meters / 1000).toFixed(1);
+        }
+
+        function formatDuration(totalSeconds) {
+            if (!Number.isFinite(totalSeconds)) return '--';
+            let remaining = Math.max(0, Math.round(totalSeconds));
+            const days = Math.floor(remaining / 86400);
+            remaining %= 86400;
+            const hours = Math.floor(remaining / 3600);
+            remaining %= 3600;
+            const minutes = Math.floor(remaining / 60);
+            const seconds = remaining % 60;
+            const parts = [];
+            if (days) parts.push(`${days} day${days !== 1 ? 's' : ''}`);
+            if (hours) parts.push(`${hours} hr${hours !== 1 ? 's' : ''}`);
+            if (minutes) parts.push(`${minutes} min${minutes !== 1 ? 's' : ''}`);
+            if (!parts.length && seconds) parts.push(`${seconds} sec${seconds !== 1 ? 's' : ''}`);
+            if (!parts.length) parts.push('<1 min');
+            return parts.join(' ');
+        }
+
+        function haversine(lat1, lon1, lat2, lon2) {
+            const toRad = deg => deg * Math.PI / 180;
+            const R = 6371;
+            const dLat = toRad(lat2 - lat1);
+            const dLon = toRad(lon2 - lon1);
+            const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+            return 2 * R * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        }
+
+        function highlightVendors(routeCoords) {
+            const nearby = [];
+            vendorMarkers.forEach(v => {
+                let near = false;
+                for (let i = 0; i < routeCoords.length; i++) {
+                    const [lng, lat] = routeCoords[i];
+                    if (haversine(lat, lng, v.lat, v.lng) <= 1.2) {
+                        near = true;
+                        break;
                     }
-                });
-            });
-        }
-
-        function loadGoogleMapsThenInit() {
-            const script = document.createElement('script');
-            script.src = `https://maps.googleapis.com/maps/api/js?key=${GMAPS_KEY}`;
-            script.async = true;
-            script.defer = true;
-            script.onload = () => {
-                if (window.google && window.google.maps) {
-                    initGoogleMaps();
-                    if (typeof showToast === 'function') showToast('Google Maps enabled with live directions.');
-                } else {
-                    initLeafletFallback();
                 }
-            };
-            script.onerror = () => {
-                initLeafletFallback();
-            };
-            document.head.appendChild(script);
+                v.marker.setOpacity(near ? 1 : 0.3);
+                if (near) nearby.push(v);
+            });
+
+            vendorList.innerHTML = '';
+            if (!nearby.length) {
+                vendorResults.style.display = 'none';
+                return;
+            }
+
+            nearby.forEach(v => {
+                const item = document.createElement('div');
+                item.style.padding = '12px';
+                item.style.border = '1px solid var(--border-color)';
+                item.style.borderRadius = '12px';
+                item.style.cursor = 'pointer';
+                item.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <strong>${v.name}</strong>
+                            <p style="color:var(--text-secondary); font-size:13px; margin:4px 0 0;">${v.cuisine}</p>
+                        </div>
+                        <span class="status-chip ${v.status === 'open' ? 'open' : 'closed'}">${v.status === 'open' ? 'Open' : 'Closed'}</span>
+                    </div>
+                    <div style="font-size:13px; margin-top:6px; color:var(--text-secondary); display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+                        <span><i class="fas fa-star" style="color:#f59e0b;"></i> ${v.rating.toFixed(1)} (${v.reviews})</span>
+                        <span><i class="fas fa-clock"></i> ${v.leadTime}</span>
+                    </div>
+                `;
+                item.addEventListener('click', () => {
+                    map.setView([v.lat, v.lng], 15);
+                    v.marker.openPopup();
+                });
+                vendorList.appendChild(item);
+            });
+
+            vendorResults.style.display = 'block';
         }
 
-        if (GMAPS_KEY) {
-            loadGoogleMapsThenInit();
-        } else {
-            initLeafletFallback();
+        async function fetchRoute(start, end, profile) {
+            const url = `https://router.project-osrm.org/route/v1/${profile}/${start.lon},${start.lat};${end.lon},${end.lat}?overview=full&geometries=geojson`;
+            const response = await fetch(url);
+            const data = await response.json();
+            if (data.code !== 'Ok' || !data.routes.length) return null;
+            return data.routes[0];
         }
+
+        async function drawRoute(startInput, endInput, silent = false) {
+            if (!startInput || !endInput) {
+                if (!silent && typeof showToast === 'function') showToast('Enter both start and destination.');
+                return;
+            }
+            try {
+                const [start, end] = await Promise.all([geocode(startInput), geocode(endInput)]);
+                const route = await fetchRoute(start, end, ROUTE_PROFILE);
+                if (!route || !route.geometry?.coordinates?.length) throw new Error('Route not available');
+                const latLngs = route.geometry.coordinates.map(([lng, lat]) => [lat, lng]);
+                if (!latLngs.length) throw new Error('Route geometry unavailable');
+                if (routeLayer) routeLayer.remove();
+                routeLayer = L.polyline(latLngs, { color: '#ff6b35', weight: 5 }).addTo(map);
+                lastRouteBounds = routeLayer.getBounds();
+                map.fitBounds(lastRouteBounds, { padding: [30, 30] });
+
+                document.getElementById('routeSummary').style.display = 'block';
+                document.getElementById('routeMeta').textContent = `${km(route.distance)} km • ${formatDuration(route.duration)} (${ROUTE_LABEL})`;
+
+                highlightVendors(route.geometry.coordinates);
+                lastQuery = { startInput, endInput, startCoords: start, endCoords: end };
+            } catch (err) {
+                if (!silent && typeof showToast === 'function') {
+                    showToast(err.message || 'Could not build route.');
+                }
+            }
+        }
+
+        document.getElementById('drawRoute').addEventListener('click', () => {
+            const startInput = document.getElementById('mapStart').value.trim();
+            const endInput = document.getElementById('mapEnd').value.trim();
+            drawRoute(startInput, endInput);
+        });
+
+        document.getElementById('recenterRoute').addEventListener('click', () => {
+            if (lastRouteBounds) {
+                map.fitBounds(lastRouteBounds, { padding: [30, 30] });
+            } else if (lastQuery?.startCoords) {
+                map.setView([lastQuery.startCoords.lat, lastQuery.startCoords.lon], 12);
+            } else {
+                map.setView([6.5244, 3.3792], 11);
+            }
+        });
+
+        function locateUser(panToUser = false) {
+            if (!navigator.geolocation) {
+                showLocationStatus('Geolocation is not supported on this device.', 'error');
+                if (typeof showToast === 'function') showToast('Geolocation not supported on this device.');
+                return;
+            }
+            showLocationStatus('Trying to pin your location…');
+            navigator.geolocation.getCurrentPosition(position => {
+                const { latitude, longitude, accuracy } = position.coords;
+                if (!userMarker) {
+                    userMarker = L.circleMarker([latitude, longitude], {
+                        radius: 8,
+                        fillColor: '#2563eb',
+                        color: '#ffffff',
+                        weight: 2,
+                        fillOpacity: 1
+                    }).addTo(map);
+                } else {
+                    userMarker.setLatLng([latitude, longitude]);
+                }
+
+                if (!userAccuracy) {
+                    userAccuracy = L.circle([latitude, longitude], {
+                        radius: accuracy || 60,
+                        color: '#2563eb',
+                        fillColor: '#2563eb',
+                        fillOpacity: 0.08,
+                        weight: 1
+                    }).addTo(map);
+                } else {
+                    userAccuracy.setLatLng([latitude, longitude]);
+                    userAccuracy.setRadius(accuracy || 60);
+                }
+
+                if (panToUser) {
+                    map.setView([latitude, longitude], 14);
+                }
+                showLocationStatus(`Pinned your location (±${Math.round(accuracy || 60)} m).`);
+                setTimeout(hideLocationStatus, 5000);
+            }, (err) => {
+                let message = 'Unable to detect your location.';
+                if (err?.code === err.PERMISSION_DENIED) {
+                    message = 'Location permission denied. Enable location access to see nearby vendors.';
+                } else if (err?.code === err.POSITION_UNAVAILABLE) {
+                    message = 'Location unavailable. Check your GPS or network signal.';
+                } else if (err?.code === err.TIMEOUT) {
+                    message = 'Location request timed out. Try again from an open area.';
+                }
+                showLocationStatus(message, 'error');
+                if (typeof showToast === 'function') showToast(message);
+            }, { enableHighAccuracy: true, timeout: 10000 });
+        }
+
+        document.getElementById('locateUser').addEventListener('click', () => locateUser(true));
+        locateUser(false);
     </script>
 </body>
 </html>
